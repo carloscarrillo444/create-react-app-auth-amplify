@@ -14,20 +14,18 @@ class App extends Component {
     console.log('constructor - Starting');
     let currentFile1 =  undefined;
     this.state = {
-      currentFile: undefined,
-      previewImage: undefined,
-      progress: 0,
-      message: "",
-      imageInfos: [],
-    };   
-
+      file: null
+    }
+    this.selectFile = this.selectFile.bind(this)
   }
 
   selectFile(event) {
     console.log('selectFile - Starting');
     //this.state.currentFile = event.target.files[0];
-    
-    console.log('selectFile - Finishing' + event.target.files[0]);
+    this.setState({
+      file: URL.createObjectURL(event.target.files[0])
+    })
+    console.log('selectFile - Finishing' + this.state.file);
 
   }
   

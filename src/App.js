@@ -42,11 +42,19 @@ class App extends Component {
     console.log('onFileUpload: this.state.selectedFile'); 
     console.log(this.state.selectedFile); 
 
-    imageDisplay: ArrayBuffer;
+    
     const reader = new FileReader();
     reader.readAsDataURL(this.state.selectedFile);
     reader.onload = () =>  imageDisplay = reader.result;
-    console.log('onFileUpload: this.imageDisplay' + this.imageDisplay); 
+
+    reader.onload = function () {
+      console.log(reader.result);//base64encoded string
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+    
+   
    
     axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', formData)
     .then(response => this.setState({ updatedAt: response.data.updatedAt }))

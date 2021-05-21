@@ -47,6 +47,14 @@ class App extends Component {
     reader.readAsDataURL(this.state.selectedFile);
     reader.onload = function () {
       console.log(reader.result);//base64encoded string
+
+      axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', reader.result)
+    .then(response => this.setState({ updatedAt: response.data.updatedAt }))
+    .catch(error => {
+        this.setState({ errorMessage: error.message });
+        console.error('There was an error!', error);
+    });
+
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -54,12 +62,7 @@ class App extends Component {
     
    
    
-    axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', formData)
-    .then(response => this.setState({ updatedAt: response.data.updatedAt }))
-    .catch(error => {
-        this.setState({ errorMessage: error.message });
-        console.error('There was an error!', error);
-    });
+    
 
     console.log('onFileUpload: axios.put blob' ); 
     axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', this.imageDisplay)

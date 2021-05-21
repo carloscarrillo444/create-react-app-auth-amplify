@@ -25,7 +25,7 @@ class App extends Component {
 
   selectFile(event) {
     console.log('selectFile - Starting');
-    this.currentFile1 = event.target.files[0];
+    this.state.currentFile = event.target.files[0];
     
     console.log('selectFile - Finishing');
 

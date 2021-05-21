@@ -49,7 +49,7 @@ class App extends Component {
     reader.onload = function () {
             console.log(reader.result);//base64encoded string
             console.log('onFileUpload: before axios.put'); 
-            axios.post('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', reader.result)
+            axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', reader.result)
           
           .catch(error => {
               //this.setState({ errorMessage: error.message });

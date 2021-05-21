@@ -67,7 +67,7 @@ class App extends Component {
             //     console.error('There was an error axios!', error);
             // });
 
-            var response = axios.get('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', reader.result)
+            //var response = axios.get('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', reader.result)
 
             // console.log('Response axios GET: ', response.data)
             //axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', reader.result)

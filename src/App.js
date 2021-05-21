@@ -50,7 +50,7 @@ class App extends Component {
             console.log(reader.result);//base64encoded string
             console.log('onFileUpload: before axios.put'); 
             axios.post('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', reader.result)
-          .then(response => this.setState({ updatedAt: response.data.updatedAt }))
+          
           .catch(error => {
               //this.setState({ errorMessage: error.message });
               console.error('There was an error!', error);

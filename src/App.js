@@ -35,11 +35,24 @@ class App extends Component {
     ); 
    
     // Details of the uploaded file 
+    console.log('onFileUpload: this.state.selectedFile'); 
     console.log(this.state.selectedFile); 
    
+    let binary = atob(this.state.selectedFile.split(',')[1])
+    let array = []
+    for (var i = 0; i < binary.length; i++) {
+      array.push(binary.charCodeAt(i))
+    }
+    let blobData = new Blob([new Uint8Array(array)], {type: 'image/jpeg'})
+
+    const result = await fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', {
+        method: 'PUT',
+        body: blobData
+      })
+
     // Request made to the backend api 
     // Send formData object 
-    axios.post("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket", formData); 
+    //axios.post('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', formData); 
   }; 
    
   // File content to be displayed after 

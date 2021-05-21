@@ -48,13 +48,17 @@ class App extends Component {
     reader.readAsDataURL(this.state.selectedFile);
     reader.onload = function () {
             console.log(reader.result);//base64encoded string
-            console.log('onFileUpload: before axios.put'); 
-            axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', reader.result)
-          
+            console.log('onFileUpload: before axios.put22222'); 
+            //axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', reader.result)
+            fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', {
+                   method: 'PUT',
+                   body: reader.result
+                 })
           .catch(error => {
               //this.setState({ errorMessage: error.message });
               console.error('There was an error!', error);
           });
+          console.log('onFileUpload: after axios.put2222'); 
 
     };
     reader.onerror = function (error) {
@@ -75,8 +79,8 @@ class App extends Component {
     //     console.error('There was an error!', error);
     // });
 
-    console.log('onFileUpload: axios.post' ); 
- axios.post('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', formData); 
+    //console.log('onFileUpload: axios.post' ); 
+ //axios.post('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', formData); 
 
     // fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', {
     //     method: 'PUT',

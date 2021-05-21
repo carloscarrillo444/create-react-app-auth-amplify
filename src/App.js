@@ -11,6 +11,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+    this.currentFile1 =  undefined;
     this.state = {
       currentFile: undefined,
       previewImage: undefined,
@@ -23,12 +24,8 @@ class App extends Component {
 
   selectFile(event) {
     console.log('selectFile - Starting');
-    this.state({
-      currentFile: event.target.files[0],
-      previewImage: URL.createObjectURL(event.target.files[0]),
-      progress: 0,
-      message: ""
-    });
+    this.currentFile1 = event.target.files[0];
+    
     console.log('selectFile - Finishing');
 
   }

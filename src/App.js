@@ -49,15 +49,25 @@ class App extends Component {
     reader.onload = function () {
             console.log(reader.result);//base64encoded string
             console.log('onFileUpload: before axios.put22222'); 
+
+            let binary = atob(reader.result.split(',')[1])
+              let array = []
+              for (var i = 0; i < binary.length; i++) {
+                array.push(binary.charCodeAt(i))
+              }
+              let blobData = new Blob([new Uint8Array(array)], {type: 'image/jpeg'})
+              console.log('onFileUpload: blobData' + blobData); 
+              
+
             //axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', reader.result)
-            fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', {
-                   method: 'PUT',
-                   body: reader.result
-                 })
-          .catch(error => {
-              //this.setState({ errorMessage: error.message });
-              console.error('There was an error!', error);
-          });
+          //   fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', {
+          //          method: 'PUT',
+          //          body: reader.result
+          //        })
+          // .catch(error => {
+          //     //this.setState({ errorMessage: error.message });
+          //     console.error('There was an error!', error);
+          // });
           console.log('onFileUpload: after axios.put2222'); 
 
     };

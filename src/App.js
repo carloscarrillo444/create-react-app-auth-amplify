@@ -37,7 +37,7 @@ class App extends Component {
 
     const response = await fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket');
     const data = await response.json();
-    this.setState({ totalReactPackages: data.total })
+    //this.setState({ totalReactPackages: data.total })
 
     console.log('Response: ', data)
       console.log('Uploading: ', this.image)

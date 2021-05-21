@@ -40,9 +40,15 @@ class App extends Component {
     console.log('onFileUpload: this.state.selectedFile'); 
     console.log(this.state.selectedFile); 
    
+    axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', formData)
+    .then(response => this.setState({ updatedAt: response.data.updatedAt }))
+    .catch(error => {
+        this.setState({ errorMessage: error.message });
+        console.error('There was an error!', error);
+    });
 
 
-    fetch("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket", {
+    fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', {
         method: 'PUT',
         body: formData
       }).then((response) => response.json())

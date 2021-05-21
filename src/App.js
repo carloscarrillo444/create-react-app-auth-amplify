@@ -23,9 +23,9 @@ class App extends Component {
     console.log('selectFile - Starting');
     //this.state.currentFile = event.target.files[0];
     this.setState({
-      file: URL.createObjectURL(event.target.files[0])
+      file: event.target.files[0]
     })
-    console.log('selectFile - Finishing' + this.state.file);
+    console.log('selectFile - this.state.file:' + this.state.file);
 
   }
   
@@ -41,6 +41,7 @@ class App extends Component {
     // this.uploadURL = ''
 
     console.log('handleClick - Starting');
+    console.log('handleClick - this.state.file:' + this.state.file);
     let reader = new FileReader()
 
     reader.onload = (e) => {

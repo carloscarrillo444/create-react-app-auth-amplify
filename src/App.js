@@ -23,7 +23,7 @@ class App extends Component {
   }; 
    
   // On file upload (click the upload button) 
-  onFileUpload = () => { 
+  async onFileUpload(){ 
     // Create an object of formData 
     const formData = new FormData(); 
    

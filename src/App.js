@@ -65,8 +65,8 @@ class App extends Component {
               //this.setState({ errorMessage: error.message });
               console.error('There was an error!', error);
           });
-          console.log('onFileUpload: response' + response); 
-          console.log('onFileUpload: response.uploadURL' + response.uploadURL); 
+          console.log('onFileUpload: response:' + response.data); 
+          console.log('onFileUpload: response.uploadURL:' + response.data.uploadURL); 
 
             //   var response = axios({
             //     method: 'GET',

@@ -39,7 +39,7 @@ class App extends Component {
    
     // Request made to the backend api 
     // Send formData object 
-    axios.post("api/uploadfile", formData); 
+    axios.post("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket", formData); 
   }; 
    
   // File content to be displayed after 

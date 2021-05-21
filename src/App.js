@@ -11,6 +11,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+    console.log('constructor - Starting');
     let currentFile1 =  undefined;
     this.state = {
       currentFile: undefined,

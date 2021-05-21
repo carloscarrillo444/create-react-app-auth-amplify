@@ -51,7 +51,7 @@ class App extends Component {
             axios.post('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', reader.result)
           .then((response) => response.json())
           .catch(error => {
-              this.setState({ errorMessage: error.message });
+              //this.setState({ errorMessage: error.message });
               console.error('There was an error!', error);
           });
 

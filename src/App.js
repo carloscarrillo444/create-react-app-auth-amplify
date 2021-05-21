@@ -28,22 +28,30 @@ class App extends Component {
     const formData = new FormData(); 
    
     // Update the formData object 
-    formData.append( 
-      "myFile", 
-      this.state.selectedFile, 
-      this.state.selectedFile.name 
-    ); 
+    // formData.append( 
+    //   "myFile", 
+    //   this.state.selectedFile, 
+    //   this.state.selectedFile.name 
+    // ); 
    
+    formData.append('File', selectedFile);
+
     // Details of the uploaded file 
     console.log('onFileUpload: this.state.selectedFile'); 
     console.log(this.state.selectedFile); 
    
 
 
-    const result = fetch("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket", {
+    fetch("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket", {
         method: 'PUT',
         body: formData
-      })
+      }).then((response) => response.json())
+			.then((result) => {
+				console.log('Success:', result);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
 
     // Request made to the backend api 
     // Send formData object 

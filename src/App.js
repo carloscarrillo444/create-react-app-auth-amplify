@@ -11,11 +11,10 @@ class App extends Component {
 
 
   async handleClick() {
-    MAX_IMAGE_SIZE = 1000000
-    API_ENDPOINT = 'https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket'
-    image = ''
-    uploadURL = ''
-    
+
+    this.image = ''
+    this.uploadURL = ''
+
     console.log('Se hizo handleClick');
     let reader = new FileReader()
 
@@ -24,7 +23,7 @@ class App extends Component {
       if (!e.target.result.includes('data:image/jpeg')) {
         return alert('Wrong file type - JPG only.')
       }
-      if (e.target.result.length > MAX_IMAGE_SIZE) {
+      if (e.target.result.length > 1000000) {
         return alert('Image is loo large - 1Mb maximum')
       }
       this.image = e.target.result
@@ -32,7 +31,7 @@ class App extends Component {
 
     const response = await axios({
       method: 'GET',
-      url: API_ENDPOINT
+      url: 'https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket'
     })
 
     console.log('Response: ', response.data)

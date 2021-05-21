@@ -13,8 +13,8 @@ class App extends Component {
 
   async handleClick() {
 
-    this.image = ''
-    this.uploadURL = ''
+    // this.image = ''
+    // this.uploadURL = ''
 
     console.log('Se hizo handleClick');
     let reader = new FileReader()
@@ -79,7 +79,7 @@ class App extends Component {
             Learn React
           </a>
 
-          <h1>S3 Uploader Test - Questions? Ask James @jbesw</h1>
+          <h1>S3 Uploader Test</h1>
           <div v-if="!image">
           <h2>Select an image</h2>
           <input type="file"></input>

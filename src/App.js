@@ -45,8 +45,6 @@ class App extends Component {
     
     const reader = new FileReader();
     reader.readAsDataURL(this.state.selectedFile);
-    reader.onload = () =>  imageDisplay = reader.result;
-
     reader.onload = function () {
       console.log(reader.result);//base64encoded string
     };

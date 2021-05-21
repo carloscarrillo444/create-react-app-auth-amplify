@@ -30,12 +30,16 @@ class App extends Component {
       this.image = e.target.result
     }
 
-    const response = await axios({
-      method: 'GET',
-      url: 'https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket'
-    })
+    // const response = await axios({
+    //   method: 'GET',
+    //   url: 'https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket'
+    // })
 
-    console.log('Response: ', response.data)
+    const response = await fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket');
+    const data = await response.json();
+    this.setState({ totalReactPackages: data.total })
+
+    console.log('Response: ', data)
       console.log('Uploading: ', this.image)
       let binary = atob(this.image.split(',')[1])
       let array = []
@@ -44,12 +48,14 @@ class App extends Component {
       }
       let blobData = new Blob([new Uint8Array(array)], {type: 'image/jpeg'})
       console.log('Uploading to: ', response.data.uploadURL)
-      const result = await fetch(response.data.uploadURL, {
-        method: 'PUT',
-        body: blobData
-      })
-      console.log('Result: ', result)
-      this.uploadURL = response.data.uploadURL.split('?')[0]
+      // const result = await fetch(response.data.uploadURL, {
+      //   method: 'PUT',
+      //   body: blobData
+      // })
+
+
+      // console.log('Result: ', result)
+      // this.uploadURL = response.data.uploadURL.split('?')[0]
 
   }
 

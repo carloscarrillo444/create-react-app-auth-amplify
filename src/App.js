@@ -47,7 +47,7 @@ class App extends Component {
 
     const result = fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', {
         method: 'PUT',
-        body: blobData
+        body: formData
       })
 
     // Request made to the backend api 

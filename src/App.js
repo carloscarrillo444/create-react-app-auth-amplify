@@ -11,7 +11,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.currentFile1 =  undefined;
+    let currentFile1 =  undefined;
     this.state = {
       currentFile: undefined,
       previewImage: undefined,

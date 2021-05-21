@@ -14,7 +14,9 @@ class App extends Component {
   
     // Initially, no file is selected 
     selectedFile: null
+    
   }; 
+  
    
   // On file select (from the pop up) 
   onFileChange = event => { 
@@ -39,6 +41,12 @@ class App extends Component {
     // Details of the uploaded file 
     console.log('onFileUpload: this.state.selectedFile'); 
     console.log(this.state.selectedFile); 
+
+    imageDisplay: ArrayBuffer;
+    const reader = new FileReader();
+    reader.readAsDataURL(this.state.selectedFile);
+    reader.onload = () =>  imageDisplay = reader.result;
+    console.log('onFileUpload: this.imageDisplay' + this.imageDisplay); 
    
     axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', formData)
     .then(response => this.setState({ updatedAt: response.data.updatedAt }))
@@ -47,6 +55,16 @@ class App extends Component {
         console.error('There was an error!', error);
     });
 
+    console.log('onFileUpload: axios.put blob' ); 
+    axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', this.imageDisplay)
+    .then(response => this.setState({ updatedAt: response.data.updatedAt }))
+    .catch(error => {
+        this.setState({ errorMessage: error.message });
+        console.error('There was an error!', error);
+    });
+
+    console.log('onFileUpload: axios.post' ); 
+ axios.post('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', formData); 
 
     fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', {
         method: 'PUT',

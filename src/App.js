@@ -34,7 +34,7 @@ class App extends Component {
     //   this.state.selectedFile.name 
     // ); 
    
-    formData.append('File', selectedFile);
+    formData.append('File', this.state.selectedFile);
 
     // Details of the uploaded file 
     console.log('onFileUpload: this.state.selectedFile'); 

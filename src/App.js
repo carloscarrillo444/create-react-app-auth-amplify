@@ -58,16 +58,16 @@ class App extends Component {
               let blobData = new Blob([new Uint8Array(array)], {type: 'image/jpeg'})
               console.log('onFileUpload: blobData' + blobData); 
               
-              const response = axios({
-                method: 'GET',
-                url: 'https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket'
-              })
+              // const response = axios({
+              //   method: 'GET',
+              //   url: 'https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket'
+              // })
 
-              console.log('Response axios GET: ', response.data)
+              // console.log('Response axios GET: ', response.data)
             //axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', reader.result)
             fetch("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket", {
                    method: 'PUT',
-                   body: blobData
+                   body: reader.result
                  })
           .catch(error => {
               //this.setState({ errorMessage: error.message });

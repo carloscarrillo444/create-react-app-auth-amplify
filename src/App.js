@@ -11,12 +11,18 @@ class App extends Component {
 
 
 
+  getInitialState(){
+    console.log('getInitialState - Starting');
+    return{file: []}
+  }
+
+
   async handleClick() {
 
     // this.image = ''
     // this.uploadURL = ''
 
-    console.log('Se hizo handleClick');
+    console.log('handleClick - Starting');
     let reader = new FileReader()
 
     reader.onload = (e) => {
@@ -58,6 +64,20 @@ class App extends Component {
       // this.uploadURL = response.data.uploadURL.split('?')[0]
 
   }
+  onChange(){
+    // Assuming only image
+    var file = this.refs.file.files[0];
+    var reader = new FileReader();
+    var url = reader.readAsDataURL(file);
+  
+     reader.onloadend = function (e) {
+        this.setState({
+            imgSrc: [reader.result]
+        })
+      }.bind(this);
+    console.log(url) // Would see a path?
+    // TODO: concat files
+  }
 
 
   render() {
@@ -70,19 +90,19 @@ class App extends Component {
           <p>
             Edit <code>src/App.js</code> and save to reload hello.
           </p>
-          <a
+          {/* <a
             className="App-link"
             href="https://reactjs.org"
             target="_blank"
             rel="noopener noreferrer"
           >
             Learn React
-          </a>
+          </a> */}
 
           <h1>S3 Uploader Test</h1>
           <div v-if="!image">
           <h2>Select an image</h2>
-          <input type="file"></input>
+          <input ref="file"  type="file" onChange={this.onChange}></input>
           <button v-if="!uploadURL" onClick={this.handleClick}>Upload image</button>
 
 

@@ -9,8 +9,30 @@ Amplify.configure(aws_exports);
 
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentFile: undefined,
+      previewImage: undefined,
+      progress: 0,
+      message: "",
+      imageInfos: [],
+    };   
 
+  }
 
+  selectFile(event) {
+    console.log('selectFile - Starting');
+    this.setState({
+      currentFile: event.target.files[0],
+      previewImage: URL.createObjectURL(event.target.files[0]),
+      progress: 0,
+      message: ""
+    });
+    console.log('selectFile - Finishing');
+
+  }
+  
   getInitialState(){
     console.log('getInitialState - Starting');
     return{file: []}
@@ -82,7 +104,16 @@ class App extends Component {
 
   render() {
 
-    console.log('I am here 1');
+    const {
+      currentFile,
+      previewImage,
+      progress,
+      message,
+      imageInfos,
+    } = this.state;
+
+
+    console.log('render - Starting');
     return (
       <div className="App">
         <header className="App-header">
@@ -102,7 +133,7 @@ class App extends Component {
           <h1>S3 Uploader Test</h1>
           <div v-if="!image">
           <h2>Select an image</h2>
-          <input ref="file"  type="file" onChange={this.onChange}></input>
+          <input ref="file"  type="file" onChange={this.selectFile}></input>
           <button v-if="!uploadURL" onClick={this.handleClick}>Upload image</button>
 
 

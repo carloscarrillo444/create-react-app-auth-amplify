@@ -5,7 +5,6 @@ import './App.css';
 import { withAuthenticator } from 'aws-amplify-react'
 import Amplify, { Auth } from 'aws-amplify';
 import aws_exports from './aws-exports';
-import UploadService from "https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket";
 
 Amplify.configure(aws_exports);
 

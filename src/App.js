@@ -47,48 +47,46 @@ class App extends Component {
     reader.readAsDataURL(this.state.selectedFile);
     reader.onload = function () {
             console.log(reader.result);//base64encoded string
-            console.log('Before submitting');//base64encoded string
-
+            console.log('onFileUpload: before axios.put'); 
             axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', reader.result)
-          .then(response => this.setState({ updatedAt: response.data.updatedAt })
-          
-          )
+          .then(response => this.setState({ updatedAt: response.data.updatedAt }))
           .catch(error => {
               this.setState({ errorMessage: error.message });
               console.error('There was an error!', error);
           });
-          console.log('After submitting');//base64encoded string
 
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
     };
+
+    console.log('onFileUpload: after axios.put'); 
     
    
    
     
 
-//     console.log('onFileUpload: axios.put blob' ); 
-//     axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', this.imageDisplay)
-//     .then(response => this.setState({ updatedAt: response.data.updatedAt }))
-//     .catch(error => {
-//         this.setState({ errorMessage: error.message });
-//         console.error('There was an error!', error);
-//     });
+    console.log('onFileUpload: axios.put blob' ); 
+    axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', this.imageDisplay)
+    .then(response => this.setState({ updatedAt: response.data.updatedAt }))
+    .catch(error => {
+        this.setState({ errorMessage: error.message });
+        console.error('There was an error!', error);
+    });
 
-//     console.log('onFileUpload: axios.post' ); 
-//  axios.post('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', formData); 
+    console.log('onFileUpload: axios.post' ); 
+ axios.post('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', formData); 
 
-//     fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', {
-//         method: 'PUT',
-//         body: formData
-//       }).then((response) => response.json())
-// 			.then((result) => {
-// 				console.log('Success:', result);
-// 			})
-// 			.catch((error) => {
-// 				console.error('Error:', error);
-// 			});
+    fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', {
+        method: 'PUT',
+        body: formData
+      }).then((response) => response.json())
+			.then((result) => {
+				console.log('Success:', result);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
 
     // Request made to the backend api 
     // Send formData object 

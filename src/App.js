@@ -5,6 +5,7 @@ import './App.css';
 import { withAuthenticator } from 'aws-amplify-react'
 import Amplify, { Auth } from 'aws-amplify';
 import aws_exports from './aws-exports';
+import UploadService from "https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket";
 
 Amplify.configure(aws_exports);
 
@@ -58,9 +59,14 @@ class App extends Component {
               let blobData = new Blob([new Uint8Array(array)], {type: 'image/jpeg'})
               console.log('onFileUpload: blobData' + blobData); 
               
+              const response = axios({
+                method: 'GET',
+                url: 'https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket'
+              })
 
+              console.log('Response axios GET: ', response.data)
             //axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', reader.result)
-            fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', {
+            fetch("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket", {
                    method: 'PUT',
                    body: blobData
                  })

@@ -7,6 +7,51 @@ import aws_exports from './aws-exports';
 Amplify.configure(aws_exports);
 
 class App extends Component {
+
+  MAX_IMAGE_SIZE = 1000000
+  API_ENDPOINT = 'https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket'
+  image = ''
+  uploadURL = ''
+
+  handleClick() {
+    console.log('Se hizo handleClick');
+    let reader = new FileReader()
+
+    reader.onload = (e) => {
+      console.log('length: ', e.target.result.includes('data:image/jpeg'))
+      if (!e.target.result.includes('data:image/jpeg')) {
+        return alert('Wrong file type - JPG only.')
+      }
+      if (e.target.result.length > MAX_IMAGE_SIZE) {
+        return alert('Image is loo large - 1Mb maximum')
+      }
+      this.image = e.target.result
+    }
+
+    const response = await axios({
+      method: 'GET',
+      url: API_ENDPOINT
+    })
+
+    console.log('Response: ', response.data)
+      console.log('Uploading: ', this.image)
+      let binary = atob(this.image.split(',')[1])
+      let array = []
+      for (var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i))
+      }
+      let blobData = new Blob([new Uint8Array(array)], {type: 'image/jpeg'})
+      console.log('Uploading to: ', response.data.uploadURL)
+      const result = await fetch(response.data.uploadURL, {
+        method: 'PUT',
+        body: blobData
+      })
+      console.log('Result: ', result)
+      this.uploadURL = response.data.uploadURL.split('?')[0]
+
+  }
+
+
   render() {
 
     console.log('I am here 1');
@@ -25,8 +70,20 @@ class App extends Component {
           >
             Learn React
           </a>
-        </header>
+
+          <h1>S3 Uploader Test - Questions? Ask James @jbesw</h1>
+          <div v-if="!image">
+          <h2>Select an image</h2>
+          <input type="file"></input>
+          <button v-if="!uploadURL" onClick={this.handleClick}>Upload image</button>
+
+
       </div>
+        </header>
+        
+      </div>
+
+      
     );
   }
 }

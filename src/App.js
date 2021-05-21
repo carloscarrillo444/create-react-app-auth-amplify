@@ -8,12 +8,14 @@ Amplify.configure(aws_exports);
 
 class App extends Component {
 
-  MAX_IMAGE_SIZE = 1000000
-  API_ENDPOINT = 'https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket'
-  image = ''
-  uploadURL = ''
+
 
   async handleClick() {
+    MAX_IMAGE_SIZE = 1000000
+    API_ENDPOINT = 'https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket'
+    image = ''
+    uploadURL = ''
+    
     console.log('Se hizo handleClick');
     let reader = new FileReader()
 

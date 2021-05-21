@@ -8,6 +8,8 @@ Amplify.configure(aws_exports);
 
 class App extends Component {
   render() {
+
+    console.log('I am here 1');
     return (
       <div className="App">
         <header className="App-header">

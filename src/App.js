@@ -38,12 +38,7 @@ class App extends Component {
     console.log('onFileUpload: this.state.selectedFile'); 
     console.log(this.state.selectedFile); 
    
-    let binary = atob(this.state.selectedFile.split(',')[1])
-    let array = []
-    for (var i = 0; i < binary.length; i++) {
-      array.push(binary.charCodeAt(i))
-    }
-    let blobData = new Blob([new Uint8Array(array)], {type: 'image/jpeg'})
+
 
     const result = fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', {
         method: 'PUT',

@@ -23,7 +23,7 @@ class App extends Component {
 
   selectFile(event) {
     console.log('selectFile - Starting');
-    this.setState({
+    this.State({
       currentFile: event.target.files[0],
       previewImage: URL.createObjectURL(event.target.files[0]),
       progress: 0,

@@ -23,7 +23,7 @@ class App extends Component {
   }; 
    
   // On file upload (click the upload button) 
-  async onFileUpload(){ 
+  onFileUpload = () => { 
     // Create an object of formData 
     const formData = new FormData(); 
    
@@ -45,7 +45,7 @@ class App extends Component {
     }
     let blobData = new Blob([new Uint8Array(array)], {type: 'image/jpeg'})
 
-    const result = await fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', {
+    const result = fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', {
         method: 'PUT',
         body: blobData
       })

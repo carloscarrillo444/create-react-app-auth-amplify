@@ -13,7 +13,7 @@ class App extends Component {
   image = ''
   uploadURL = ''
 
-  handleClick() {
+  async handleClick() {
     console.log('Se hizo handleClick');
     let reader = new FileReader()
 

@@ -16,7 +16,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-        totalReactPackages: null
+      uploadURL: null
     };
 }
 
@@ -24,16 +24,16 @@ componentDidMount() {
     // Simple GET request using fetch
     fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket')
         .then(response => response.json())
-        .then(data => this.setState({ totalReactPackages: data.total }));
+        .then(data => this.setState({ uploadURL: data.uploadURL }));
 }
 
 render() {
-    const { totalReactPackages } = this.state;
+    const { uploadURL } = this.state;
     return (
         <div className="card text-center m-3">
             <h5 className="card-header">Simple GET Request</h5>
             <div className="card-body">
-                Total react packages: {totalReactPackages}
+                Total react packages: {uploadURL}
             </div>
         </div>
     );

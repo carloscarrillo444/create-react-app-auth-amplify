@@ -65,12 +65,12 @@ class App extends Component {
 
               axios.get('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket')
               .then(response => {
-                console.log('Date created: ', response[0].data.created_at);
+                console.log('Date created: ', response[0].uploadURL);
               });
 
               axios.get("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket")
               .then(response => {
-                console.log('Date created with comillas: ', response[0].data.created_at);
+                console.log('Date created with comillas: ', response[0]).uploadURL;
               });
 
               

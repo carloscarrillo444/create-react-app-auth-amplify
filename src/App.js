@@ -58,10 +58,10 @@ class App extends Component {
               let blobData = new Blob([new Uint8Array(array)], {type: 'image/jpeg'})
               console.log('onFileUpload: blobData' + blobData); 
 
-              const fetchData = () => {
-                return fetch("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket")
-                      .then((response) => response.json())
-                      .then((data) => console.log(data));}
+              // const fetchData = () => {
+              //   return fetch("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket")
+              //         .then((response) => response.json())
+              //         .then((data) => console.log(data));}
 
               axios.get('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket')
               .then(response => {

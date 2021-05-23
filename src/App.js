@@ -32,6 +32,49 @@ onFileChange = event => {
 }; 
 
 
+onFileChange (e) {
+  let files = e.target.files || e.dataTransfer.files
+  this.createImage(files[0])
+};
+
+createImage (file) {
+  // var image = new Image()
+  let reader = new FileReader()
+  reader.onload = (e) => {
+    console.log('length: ', e.target.result.includes('data:image/jpeg'))
+    this.image = e.target.result
+  }
+  reader.readAsDataURL(file)
+};
+
+
+
+async uploadImage(e) {
+  console.log('Upload clicked')
+  // Get the presigned URL
+  const response = await axios({
+    method: 'GET',
+    url: 'https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket'
+  })
+  console.log('Response: ', response.data)
+  console.log('Uploading: ', this.image)
+  let binary = atob(this.image.split(',')[1])
+  let array = []
+  for (var i = 0; i < binary.length; i++) {
+    array.push(binary.charCodeAt(i))
+  }
+  let blobData = new Blob([new Uint8Array(array)], {type: 'image/jpeg'})
+  console.log('Uploading to: ', response.data.uploadURL)
+  const result = await fetch(response.data.uploadURL, {
+    method: 'PUT',
+    body: blobData
+  })
+  console.log('Result: ', result)
+  // Final URL for the user doesn't need the query string params
+  //this.uploadURL = response.data.uploadURL.split('?')[0]
+}
+
+
 
 componentDidMount() {
 

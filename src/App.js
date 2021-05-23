@@ -25,6 +25,23 @@ class App extends Component {
     // Update the state 
     this.setState({ selectedFile: event.target.files[0] }); 
   }; 
+
+  async axiosTest() {
+    const response = await axios.get('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket')
+    return response.data
+};
+
+async axiosTest1() {
+  try {
+    const {data:response} = await axios.get('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket')
+    return response
+  }
+
+  catch (error) {
+    console.log(error);
+  }
+}
+
    
   // On file upload (click the upload button) 
   onFileUpload = () => { 
@@ -59,20 +76,16 @@ class App extends Component {
               let blobData = new Blob([new Uint8Array(array)], {type: 'image/jpeg'})
               console.log('onFileUpload: blobData' + blobData); 
 
-              // const fetchData = () => {
-              //   return fetch("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket")
-              //         .then((response) => response.json())
-              //         .then((data) => console.log(data));}
-
-              
+              const res1 = axiosTest();
+              console.log('axiosTest: ', res1);
+              const res2 = axiosTest1();
+              console.log('axiosTest1: ', res2);
 
               axios.get("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket")
               .then(response => {
-                this.setState({ uploadURL: response.data.uploadURL }); 
-                console.log('Date created with comillas: ', this.state.uploadURL);
+                              console.log('Date created with comillas: ', response.data.uploadURL);
               });
 
-              console.log('Date created with comillas: ', this.state.uploadURL);
               
               //const response = fetch("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket")
               //const data = response.json();

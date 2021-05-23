@@ -14,7 +14,8 @@ class App extends Component {
   
     // Initially, no file is selected 
     selectedFile: null,
-    updatedAt: null
+    updatedAt: null,
+    uploadURL: null
     
   }; 
   
@@ -63,16 +64,15 @@ class App extends Component {
               //         .then((response) => response.json())
               //         .then((data) => console.log(data));}
 
-              axios.get('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket')
-              .then(response => {
-                console.log('Date created: ', response);
-              });
+              
 
               axios.get("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket")
               .then(response => {
-                console.log('Date created with comillas: ', response.data.uploadURL);
+                this.setState({ uploadURL: response.data.uploadURL }); 
+                console.log('Date created with comillas: ', this.state.uploadURL);
               });
 
+              console.log('Date created with comillas: ', this.state.uploadURL);
               
               //const response = fetch("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket")
               //const data = response.json();

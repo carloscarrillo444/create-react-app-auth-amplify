@@ -63,6 +63,16 @@ class App extends Component {
                       .then((response) => response.json())
                       .then((data) => console.log(data));}
 
+              axios.get('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket')
+              .then(response => {
+                console.log('Date created: ', response[0].data.created_at);
+              });
+
+              axios.get("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket")
+              .then(response => {
+                console.log('Date created with comillas: ', response[0].data.created_at);
+              });
+
               
               //const response = fetch("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket")
               //const data = response.json();
@@ -82,14 +92,14 @@ class App extends Component {
 
             // console.log('Response axios GET: ', response.data)
             //axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', reader.result)
-            fetch("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket", {
-                   method: 'PUT',
-                   body: reader.result
-                 })
-          .catch(error => {
-              //this.setState({ errorMessage: error.message });
-              console.error('There was an error!', error);
-          });
+          //   fetch("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket", {
+          //          method: 'PUT',
+          //          body: reader.result
+          //        })
+          // .catch(error => {
+          //     //this.setState({ errorMessage: error.message });
+          //     console.error('There was an error!', error);
+          // });
           console.log('onFileUpload: after axios.put2222'); 
 
     };

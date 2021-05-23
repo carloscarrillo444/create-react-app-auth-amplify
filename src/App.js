@@ -38,7 +38,7 @@ componentDidMount() {
         
 }
 
-componentDidMount() {
+onFileUpload() {
 
   console.log('this.state.selectedFile:', this.state.selectedFile);
     fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket')

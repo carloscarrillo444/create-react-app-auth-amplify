@@ -10,194 +10,35 @@ Amplify.configure(aws_exports);
 
 class App extends Component {
 
-  state = { 
-  
-    // Initially, no file is selected 
-    selectedFile: null,
-    updatedAt: null,
-    uploadURL: null
-    
-  }; 
-  
-   
-  // On file select (from the pop up) 
-  onFileChange = event => { 
-    // Update the state 
-    this.setState({ selectedFile: event.target.files[0] }); 
-  }; 
 
-  async axiosTest() {
-    const response = await axios.get('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket')
-    return response.data
-};
 
-async axiosTest1() {
-  try {
-    const {data:response} = await axios.get('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket')
-    return response
-  }
+  constructor(props) {
+    super(props);
 
-  catch (error) {
-    console.log(error);
-  }
+    this.state = {
+        totalReactPackages: null
+    };
 }
 
-   
-  // On file upload (click the upload button) 
-  onFileUpload = () => { 
-    // Create an object of formData 
-    const formData = new FormData(); 
-   
-    // Update the formData object 
-    // formData.append( 
-    //   "myFile", 
-    //   this.state.selectedFile, 
-    //   this.state.selectedFile.name 
-    // ); 
-   
-    formData.append('File', this.state.selectedFile);
+componentDidMount() {
+    // Simple GET request using fetch
+    fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket')
+        .then(response => response.json())
+        .then(data => this.setState({ totalReactPackages: data.total }));
+}
 
-    // Details of the uploaded file 
-    console.log('onFileUpload: this.state.selectedFile'); 
-    console.log(this.state.selectedFile); 
+render() {
+    const { totalReactPackages } = this.state;
+    return (
+        <div className="card text-center m-3">
+            <h5 className="card-header">Simple GET Request</h5>
+            <div className="card-body">
+                Total react packages: {totalReactPackages}
+            </div>
+        </div>
+    );
+}
 
-    
-    const reader = new FileReader();
-    reader.readAsDataURL(this.state.selectedFile);
-    reader.onload = function () {
-            console.log(reader.result);//base64encoded string
-            console.log('onFileUpload: before axios.put22222'); 
-
-            let binary = atob(reader.result.split(',')[1])
-              let array = []
-              for (var i = 0; i < binary.length; i++) {
-                array.push(binary.charCodeAt(i))
-              }
-              let blobData = new Blob([new Uint8Array(array)], {type: 'image/jpeg'})
-              console.log('onFileUpload: blobData' + blobData); 
-
-              const res1 = axiosTest();
-              console.log('axiosTest: ', res1);
-              const res2 = axiosTest1();
-              console.log('axiosTest1: ', res2);
-
-              axios.get("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket")
-              .then(response => {
-                              console.log('Date created with comillas: ', response.data.uploadURL);
-              });
-
-              
-              //const response = fetch("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket")
-              //const data = response.json();
-          //console.log('onFileUpload: response:' + data); 
-          //console.log('onFileUpload: response.uploadURL:' + data.results[0]); 
-
-            //   var response = axios({
-            //     method: 'GET',
-            //     url: 'https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket'
-            //   })
-            //   .catch(error => {
-            //     //this.setState({ errorMessage: error.message });
-            //     console.error('There was an error axios!', error);
-            // });
-
-            //var response = axios.get('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', reader.result)
-
-            // console.log('Response axios GET: ', response.data)
-            //axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', reader.result)
-          //   fetch("https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket", {
-          //          method: 'PUT',
-          //          body: reader.result
-          //        })
-          // .catch(error => {
-          //     //this.setState({ errorMessage: error.message });
-          //     console.error('There was an error!', error);
-          // });
-          console.log('onFileUpload: after axios.put2222'); 
-
-    };
-    reader.onerror = function (error) {
-      console.log('Error: ', error);
-    };
-
-    console.log('onFileUpload: after axios.put'); 
-    
-   
-   
-    
-
-    //console.log('onFileUpload: axios.put blob' ); 
-    // axios.put('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', this.imageDisplay)
-    // .then(response => this.setState({ updatedAt: response.data.updatedAt }))
-    // .catch(error => {
-    //     this.setState({ errorMessage: error.message });
-    //     console.error('There was an error!', error);
-    // });
-
-    //console.log('onFileUpload: axios.post' ); 
- //axios.post('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', formData); 
-
-    // fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', {
-    //     method: 'PUT',
-    //     body: formData
-    //   }).then((response) => response.json())
-		// 	.then((result) => {
-		// 		console.log('Success:', result);
-		// 	})
-		// 	.catch((error) => {
-		// 		console.error('Error:', error);
-		// 	});
-
-    // Request made to the backend api 
-    // Send formData object 
-    //axios.post('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket', formData); 
-  }; 
-   
-  // File content to be displayed after 
-  // file upload is complete 
-  fileData = () => { 
-    if (this.state.selectedFile) { 
-        
-      return ( 
-        <div> 
-          <h2>File Details:</h2> 
-          <p>File Name: {this.state.selectedFile.name}</p> 
-          <p>File Type: {this.state.selectedFile.type}</p> 
-          <p> 
-            Last Modified:{" "} 
-            {this.state.selectedFile.lastModifiedDate.toDateString()} 
-          </p> 
-        </div> 
-      ); 
-    } else { 
-      return ( 
-        <div> 
-          <br /> 
-          <h4>Choose before Pressing the Upload button</h4> 
-        </div> 
-      ); 
-    } 
-  }; 
-   
-  render() { 
-    return ( 
-      <div> 
-          <h1> 
-            GeeksforGeeks 
-          </h1> 
-          <h3> 
-            File Upload using React! 
-          </h3> 
-          <div> 
-              <input type="file" onChange={this.onFileChange} /> 
-              <button onClick={this.onFileUpload}> 
-                Upload! 
-              </button> 
-          </div> 
-        {this.fileData()} 
-      </div> 
-    ); 
-  } 
 } 
 
 

@@ -111,7 +111,7 @@ render() {
                 Total react packages: {uploadURL}
             </div>
             <input type="file" onChange={this.onFileChange} /> 
-              <button onClick={this.onFileUpload}> 
+              <button onClick={this.uploadImage}> 
                 Upload! 
               </button> 
         </div>

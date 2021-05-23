@@ -27,13 +27,11 @@ onFileChange = event => {
   // Update the state 
   this.setState({ selectedFile: event.target.files[0] }); 
 
-  let reader = new FileReader()
-      reader.onload = (e) => {             
-        this.image = e.target.result
-      }
-  reader.readAsDataURL(file)
+
 
 }; 
+
+
 
 componentDidMount() {
 
@@ -42,6 +40,8 @@ componentDidMount() {
         .then(response => response.json())
         .then(data => this.setState({ uploadURL: data.uploadURL }));
         console.log('this.state.selectedFile:', this.state.uploadURL);
+        console.log('onFileUpload: this.state.selectedFile'); 
+        console.log(this.state.selectedFile); 
 
 
         

@@ -100,15 +100,16 @@ render() {
       const { selectedFile } = this.state;
       const { image } = this.state;
       return (
-          <div className="card text-center m-3">
-              <h5 className="card-header">Simple GET Request</h5>            
-              <input type="file" id="uploadImage" onChange={this.onFileChange} /> 
-              <input type="hidden" id="uploadImageValue" name="uploadImageValue" value="" />
-                <button onClick={this.onFileUpload}> 
-                  Upload! 
-                </button> 
-                {this.fileData()} 
-          </div>
+        <div className="card text-center m-3">
+          <h4>-------------------------------------------------------------------</h4>
+          <h2 className="card-header">Image Upload</h2> 
+          <h4 className="card-header">API Gateway endpoint (POST REST APIs)/ Amplify / Lambda </h4>                 
+          <input type="file" id="uploadImage" onChange={this.onFileChange} /> 
+          <input type="hidden" id="uploadImageValue" name="uploadImageValue" value="" />
+          <button onClick={this.onFileUpload}>Upload!</button> 
+          {this.fileData()} 
+          <h4>-------------------------------------------------------------------</h4>     
+      </div>
           
       );
   }

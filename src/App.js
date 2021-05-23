@@ -16,26 +16,54 @@ class App extends Component {
     super(props);
 
     this.state = {
+      selectedFile: null,
       uploadURL: null
     };
 }
 
+
+onFileChange = event => { 
+  // Update the state 
+  this.setState({ selectedFile: event.target.files[0] }); 
+}; 
+
 componentDidMount() {
-    // Simple GET request using fetch
+
+
     fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket')
         .then(response => response.json())
         .then(data => this.setState({ uploadURL: data.uploadURL }));
+
+
+        
+}
+
+componentDidMount() {
+
+  console.log('this.state.selectedFile:', this.state.selectedFile);
+    fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket')
+        .then(response => response.json())
+        .then(data => this.setState({ uploadURL: data.uploadURL }));
+        console.log('this.state.selectedFile:', this.state.uploadURL);
+
+        
 }
 
 render() {
     const { uploadURL } = this.state;
+    const { selectedFile } = this.state;
     return (
         <div className="card text-center m-3">
             <h5 className="card-header">Simple GET Request</h5>
             <div className="card-body">
                 Total react packages: {uploadURL}
             </div>
+            <input type="file" onChange={this.onFileChange} /> 
+              <button onClick={this.onFileUpload}> 
+                Upload! 
+              </button> 
         </div>
+        
     );
 }
 

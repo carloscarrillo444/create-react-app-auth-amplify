@@ -17,7 +17,8 @@ class App extends Component {
 
     this.state = {
       selectedFile: null,
-      uploadURL: null
+      uploadURL: null,
+      image: null
     };
 }
 
@@ -25,6 +26,13 @@ class App extends Component {
 onFileChange = event => { 
   // Update the state 
   this.setState({ selectedFile: event.target.files[0] }); 
+
+  let reader = new FileReader()
+      reader.onload = (e) => {             
+        this.image = e.target.result
+      }
+  reader.readAsDataURL(file)
+
 }; 
 
 componentDidMount() {
@@ -33,6 +41,7 @@ componentDidMount() {
     fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket')
         .then(response => response.json())
         .then(data => this.setState({ uploadURL: data.uploadURL }));
+        console.log('this.state.selectedFile:', this.state.uploadURL);
 
 
         
@@ -41,10 +50,10 @@ componentDidMount() {
 onFileUpload() {
 
   console.log('this.state.selectedFile:', this.state.selectedFile);
-    fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket')
-        .then(response => response.json())
-        .then(data => this.setState({ uploadURL: data.uploadURL }));
-        console.log('this.state.selectedFile:', this.state.uploadURL);
+  fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket')
+      .then(response => response.json())
+      .then(data => this.setState({ uploadURL: data.uploadURL }));
+  console.log('this.state.selectedFile:', this.state.uploadURL);
 
         
 }

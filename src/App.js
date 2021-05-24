@@ -110,28 +110,28 @@ render() {
           {this.fileData()} 
           <h4>-------------------------------------------------------------------</h4>     
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Find images based on the tags</h2> 
+          <h2 className="card-header">Find images based on the tags RONNIE-THE PLAYER (1)</h2> 
           <br /> 
           <br /> 
           <br /> 
           <br /> 
           <h4>-------------------------------------------------------------------</h4>   
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Find images based on the tags of an image</h2> 
+          <h2 className="card-header">Find images based on the tags of an image - EKLA - THE SWIMMER (1)</h2> 
           <br /> 
           <br /> 
           <br /> 
           <br /> 
           <h4>-------------------------------------------------------------------</h4>  
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Add extra tags to an image</h2> 
+          <h2 className="card-header">Add extra tags to an image - RONNIE-THE PLAYER (2)</h2> 
           <br /> 
           <br /> 
           <br /> 
           <br /> 
           <h4>-------------------------------------------------------------------</h4>   
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Delete an image</h2> 
+          <h2 className="card-header">Delete an image - EKLA - THE SWIMMER (2)</h2> 
           <br /> 
           <br /> 
           <br /> 

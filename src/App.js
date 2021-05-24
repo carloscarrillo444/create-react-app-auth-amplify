@@ -102,7 +102,7 @@ render() {
       return (
         <div className="card text-center m-3">
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Image Upload</h2> 
+          <h2 className="card-header">Image Upload CARLOS/ANAND - Please start reviewing how to fix the lambda "todo_import_handler" with the recognition</h2> 
           <h4 className="card-header">API Gateway endpoint (POST REST APIs)/ Amplify / Lambda </h4>                 
           <input type="file" id="uploadImage" onChange={this.onFileChange} /> 
           <input type="hidden" id="uploadImageValue" name="uploadImageValue" value="" />

@@ -36,7 +36,7 @@ onFileChange = event => {
             
   }
   reader.readAsDataURL(files[0])   
-  fetch('https://27e4ccrsxd.execute-api.us-east-1.amazonaws.com/default/uploadImageToBucket')
+  fetch('https://wpo2y5mgwj.execute-api.us-east-1.amazonaws.com/default/lambdauploadimagetos3')
   .then(response => response.json())
   .then(data => this.setState({ uploadURL: data.uploadURL }));
 

@@ -49,13 +49,13 @@ onFileChange = event => {
 
 onFileChange_findimagesusingtagsofimage = event => { 
 
-  this.setState({ selectedFile__findimagesusingtagsofimage: event.target.files[0] }); 
+  this.setState({ selectedFile_findimagesusingtagsofimage: event.target.files[0] }); 
 
   let files = event.target.files || event.dataTransfer.files
   let reader = new FileReader()
   reader.onload = (e) => {
     document.getElementById("uploadImageValue__findimagesusingtagsofimage").value  = e.target.result
-    this.setState({ image__findimagesusingtagsofimage: e.target.result });            
+    this.setState({ image_findimagesusingtagsofimage: e.target.result });            
   }
 
 };

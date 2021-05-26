@@ -13,14 +13,20 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // upload image
       selectedFile: null,
       uploadURL: null,
       updatedAt: null,
       image: null,
       urlResponse: null,
 
+      //findimagesusingtagsofimage
       selectedFile_findimagesusingtagsofimage: null,
-      image_findimagesusingtagsofimage: null
+      image_findimagesusingtagsofimage: null,
+
+      //Delete an image
+      selectedFile_deleteimage: null,
+      listimages_deleteimage: null
 
 
     };
@@ -59,6 +65,16 @@ onFileChange_findimagesusingtagsofimage = event => {
   }
 
 };
+
+onShowImages_deleteimage = event => { 
+
+  fetch('https://5f0ns3zvs5.execute-api.us-east-1.amazonaws.com/default/lambdagetlistimagesdynamo')  
+  .then(response => this.setState({ listimages_deleteimage: response.json()}));
+
+};
+
+
+
 
 
 onFileUpload = () => { 
@@ -163,6 +179,20 @@ fileData_findimagesusingtagsofimage = () => {
   } 
 }; 
 
+fileData_deleteimage = () => { 
+  if (this.state.listimages_deleteimage) { 
+      
+    return ( 
+      <div> 
+        <h2>Image Details:</h2> 
+        <p>Image Name: {this.state.listimages_deleteimage.id}</p>        
+      </div> 
+    ); 
+  } 
+}; 
+
+
+
 render() {
       const { uploadURL } = this.state;
       const { selectedFile } = this.state;
@@ -171,7 +201,7 @@ render() {
         <div className="card text-center m-3">
           <h4>-------------------------------------------------------------------</h4>
           <h2 className="card-header">Image Upload CARLOS/ANAND - DONE</h2> 
-          <h4 className="card-header">API Gateway endpoint (POST REST APIs)/ Amplify / Lambda </h4>                 
+          <h4 className="card-header">API Gateway endpoint / Amplify / Lambda </h4>                 
           <input type="file" id="uploadImage" onChange={this.onFileChange} /> 
           <input type="hidden" id="uploadImageValue" name="uploadImageValue" value="" />
           <button onClick={this.onFileUpload}>Upload!</button> 
@@ -186,7 +216,7 @@ render() {
           <h4>-------------------------------------------------------------------</h4>   
           <h4>-------------------------------------------------------------------</h4>
           <h2 className="card-header">Find images based on the tags of an image - ANAND/ EKLA - THE SWIMMER (1)</h2> 
-           <h4 className="card-header">API Gateway endpoint (POST REST APIs)/ Amplify / Lambda </h4>                 
+           <h4 className="card-header">API Gateway endpoint / Amplify / Lambda </h4>                 
           <input type="file" id="uploadImage_findimagesusingtagsofimage" onChange={this.onFileChange_findimagesusingtagsofimage} /> 
           <input type="hidden" id="uploadImageValue_findimagesusingtagsofimage" name="uploadImageValue_findimagesusingtagsofimage" value="" />
           <button onClick={this.onFileUpload_findimagesusingtagsofimage}>Upload!</button> 
@@ -200,11 +230,12 @@ render() {
           <br /> 
           <h4>-------------------------------------------------------------------</h4>   
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Delete an image - EKLA - THE SWIMMER (2)</h2> 
-          <br /> 
-          <br /> 
-          <br /> 
-          <br /> 
+          <h2 className="card-header">Delete an image - CARLOS</h2> 
+          <h4 className="card-header">API Gateway endpoint / Amplify / Lambda </h4>                 
+          <input type="text" id="uploadImageValue_deleteimage" name="uploadImageValue_deleteimage" value="" />
+          <button onClick={this.onShowImages_deleteimage}>Show all images</button> 
+          <button onClick={this.onDeleteImage_deleteimage}>delete image</button> 
+          {this.fileData_deleteimage()} 
           <h4>-------------------------------------------------------------------</h4>    
       </div>
           

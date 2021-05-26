@@ -130,6 +130,31 @@ onFileUpload_findimagesusingtagsofimage = () => {
   .catch(error => console.error('Error:', error)); 
 }; 
  
+onDeleteImage_deleteimage = () => { 
+
+  let binary = atob(this.state.image__findimagesusingtagsofimage.split(',')[1])
+  let array = []
+  for (var i = 0; i < binary.length; i++) {
+    array.push(binary.charCodeAt(i))
+  }
+  let blobData = new Blob([new Uint8Array(array)], {type: 'image/jpeg'})  
+
+
+  console.log('onFileUpload_findimagesusingtagsofimage: STARTING'); 
+  console.log('onFileUpload_findimagesusingtagsofimage: this.state.image'); 
+  console.log(this.state.image_findimagesusingtagsofimage); 
+  console.log('onFileUpload_findimagesusingtagsofimage: this.state.selectedFile'); 
+  console.log(this.state.selectedFile_findimagesusingtagsofimage); 
+  console.log('onFileUpload_findimagesusingtagsofimage: FINISHING'); 
+  
+  fetch("https://65zzkap2ug.execute-api.us-east-1.amazonaws.com/default/findimagesusingtagsofimage", {
+    method: 'PUT', 
+    body: blobData, 
+    
+  }).then(response => console.log('Success:', response))
+  .catch(error => console.error('Error:', error)); 
+}; 
+
 fileData = () => { 
   if (this.state.selectedFile) { 
       

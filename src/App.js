@@ -68,8 +68,12 @@ onFileChange_findimagesusingtagsofimage = event => {
 
 onShowImages_deleteimage = event => { 
 
+  console.log('onShowImages_deleteimage: STARTING'); 
+
   fetch('https://5f0ns3zvs5.execute-api.us-east-1.amazonaws.com/default/lambdagetlistimagesdynamo')  
   .then(response => this.setState({ listimages_deleteimage: response.json()}));
+
+  console.log('onShowImages_deleteimage: FINISHING'); 
 
 };
 
@@ -210,7 +214,7 @@ fileData_deleteimage = () => {
     return ( 
       <div> 
         <h2>Image Details:</h2> 
-        <p>Image Name: {this.state.listimages_deleteimage.id}</p>        
+        <p>Image Name: {this.state.listimages_deleteimage}</p>        
       </div> 
     ); 
   } 

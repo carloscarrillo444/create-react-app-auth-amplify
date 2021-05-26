@@ -55,6 +55,7 @@ onFileChange = event => {
 
 onFileChange_findimagesusingtagsofimage = event => { 
 
+  console.log('onFileChange_findimagesusingtagsofimage: STARTING');
   this.setState({ selectedFile_findimagesusingtagsofimage: event.target.files[0] }); 
 
   let files = event.target.files || event.dataTransfer.files
@@ -64,6 +65,7 @@ onFileChange_findimagesusingtagsofimage = event => {
     this.setState({ image_findimagesusingtagsofimage: e.target.result });            
   }
 
+  console.log('onFileChange_findimagesusingtagsofimage: FINISHING'); 
 };
 
 onShowImages_deleteimage = event => { 
@@ -71,8 +73,8 @@ onShowImages_deleteimage = event => {
   console.log('onShowImages_deleteimage: STARTING'); 
 
   fetch('https://5f0ns3zvs5.execute-api.us-east-1.amazonaws.com/default/lambdagetlistimagesdynamo')  
-  .then(response => response.json())
-  .then(data => this.setState({ listimages_deleteimage: data }));
+  .then(response => console.log('Success:', response))
+  //.then(data => this.setState({ listimages_deleteimage: data }));
 
   console.log('onShowImages_deleteimage: FINISHING'); 
 
@@ -263,11 +265,11 @@ render() {
           <h2 className="card-header">Delete an image - CARLOS</h2> 
           <h4 className="card-header">API Gateway endpoint / Amplify / Lambda </h4>
           <button onClick={this.onShowImages_deleteimage}>Show all images</button> 
-          <br />
+          <br /><br /> 
           <input type="text" id="uploadImageValue_deleteimage" name="uploadImageValue_deleteimage" value="" />
-          <br />
+          <br /><br /> 
           <button onClick={this.onDeleteImage_deleteimage}>delete image</button> 
-          <br />
+          <br /><br /> 
           {this.fileData_deleteimage()} 
           <h4>-------------------------------------------------------------------</h4>    
       </div>

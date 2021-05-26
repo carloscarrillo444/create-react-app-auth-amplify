@@ -71,7 +71,8 @@ onShowImages_deleteimage = event => {
   console.log('onShowImages_deleteimage: STARTING'); 
 
   fetch('https://5f0ns3zvs5.execute-api.us-east-1.amazonaws.com/default/lambdagetlistimagesdynamo')  
-  .then(response => this.setState({ listimages_deleteimage: response.json()}));
+  .then(response => response.json())
+  .then(data => this.setState({ listimages_deleteimage: data }));
 
   console.log('onShowImages_deleteimage: FINISHING'); 
 
@@ -213,8 +214,8 @@ fileData_deleteimage = () => {
       
     return ( 
       <div> 
-        <h2>Image Details:</h2> 
-        <p>Image Name: {this.state.listimages_deleteimage}</p>        
+        <h2>Images Details:</h2> 
+        <p>{this.state.listimages_deleteimage}</p>        
       </div> 
     ); 
   } 
@@ -260,10 +261,13 @@ render() {
           <h4>-------------------------------------------------------------------</h4>   
           <h4>-------------------------------------------------------------------</h4>
           <h2 className="card-header">Delete an image - CARLOS</h2> 
-          <h4 className="card-header">API Gateway endpoint / Amplify / Lambda </h4>                 
-          <input type="text" id="uploadImageValue_deleteimage" name="uploadImageValue_deleteimage" value="" />
+          <h4 className="card-header">API Gateway endpoint / Amplify / Lambda </h4>
           <button onClick={this.onShowImages_deleteimage}>Show all images</button> 
+          <br />
+          <input type="text" id="uploadImageValue_deleteimage" name="uploadImageValue_deleteimage" value="" />
+          <br />
           <button onClick={this.onDeleteImage_deleteimage}>delete image</button> 
+          <br />
           {this.fileData_deleteimage()} 
           <h4>-------------------------------------------------------------------</h4>    
       </div>

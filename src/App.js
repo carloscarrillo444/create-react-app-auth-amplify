@@ -5,6 +5,7 @@ import './App.css';
 import { withAuthenticator } from 'aws-amplify-react'
 import Amplify, { Auth } from 'aws-amplify';
 import aws_exports from './aws-exports';
+import { API } from 'aws-amplify';
 
 Amplify.configure(aws_exports);
 
@@ -137,30 +138,41 @@ onFileUpload_findimagesusingtagsofimage = () => {
   .catch(error => console.error('Error:', error)); 
 }; 
  
-onDeleteImage_deleteimage = () => { 
+onDeleteImage_deleteimage_old = () => { 
 
-  let binary = atob(this.state.image__findimagesusingtagsofimage.split(',')[1])
-  let array = []
-  for (var i = 0; i < binary.length; i++) {
-    array.push(binary.charCodeAt(i))
-  }
-  let blobData = new Blob([new Uint8Array(array)], {type: 'image/jpeg'})  
+  console.log('onDeleteImage_deleteimage: STARTING'); 
+  console.log('onDeleteImage_deleteimage: selectedFile_deleteimage'); 
+  console.log(this.state.selectedFile_deleteimage); 
+  this.state.action = 'delete'
+    
+  var output = {
+    "action": "crefffate",
+    "object": "value2"
+  };
 
-
-  console.log('onFileUpload_findimagesusingtagsofimage: STARTING'); 
-  console.log('onFileUpload_findimagesusingtagsofimage: this.state.image'); 
-  console.log(this.state.image_findimagesusingtagsofimage); 
-  console.log('onFileUpload_findimagesusingtagsofimage: this.state.selectedFile'); 
-  console.log(this.state.selectedFile_findimagesusingtagsofimage); 
-  console.log('onFileUpload_findimagesusingtagsofimage: FINISHING'); 
-  
-  fetch("https://65zzkap2ug.execute-api.us-east-1.amazonaws.com/default/findimagesusingtagsofimage", {
-    method: 'PUT', 
-    body: blobData, 
+  fetch("https://xqnqbwamrd.execute-api.us-east-1.amazonaws.com/Assignment2Stage1", {
+    method: 'POST', 
+    body: "{'action':'create'}", 
     
   }).then(response => console.log('Success:', response))
   .catch(error => console.error('Error:', error)); 
+  console.log('onDeleteImage_deleteimage: FINISHING'); 
 }; 
+
+
+async onDeleteImage_deleteimage() {
+  const data = {
+    body: {
+      action: "actiontest",
+      object: "objecttest"
+    }
+  };
+
+  console.log(data);
+  const apiData = await API.post('https://xqnqbwamrd.execute-api.us-east-1.amazonaws.com', '/Assignment2Stage1', data);
+  console.log({ apiData });
+  alert('Mail sent');
+}
 
 fileData = () => { 
   if (this.state.selectedFile) { 

@@ -169,7 +169,7 @@ async onDeleteImage_deleteimage() {
   };
 
   console.log(data);
-  const apiData = await API.post('https://xqnqbwamrd.execute-api.us-east-1.amazonaws.com', '/Assignment2Stage1', data);
+  const apiData = await API.post('https://xqnqbwamrd.execute-api.us-east-1.amazonaws.com/Assignment2Stage1', '', data);
   console.log({ apiData });
   alert('Mail sent');
 }

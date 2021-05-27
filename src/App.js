@@ -161,17 +161,55 @@ onDeleteImage_deleteimage_old = () => {
 
 
 async onDeleteImage_deleteimage() {
-  const data = {
-    body: {
-      action: "actiontest",
-      object: "objecttest"
+  
+  var variable = {
+    action: "list",
+    object: "objecttest"
+  };
+
+  const settings = {
+    method: 'POST',
+    body: JSON.stringify(variable),
+    headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
     }
   };
 
-  console.log(data);
-  const apiData = await API.post('https://xqnqbwamrd.execute-api.us-east-1.amazonaws.com/Assignment2Stage1', '', data);
-  console.log({ apiData });
-  alert('Mail sent');
+  console.log("onDeleteImage_deleteimage starting");
+
+  fetch("https://xqnqbwamrd.execute-api.us-east-1.amazonaws.com/Assignment2Stage1/lambdadynamointeractions", {
+  method: "POST",
+  headers: {
+    "content-type": "application/json"
+    ,"Access-Control-Allow-Origin": "*"
+    //"Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+    }
+    ,body: "{action: 'list', object: 'objectss'}"
+  })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
+
+
+  
+  //const apiData = await API.post('https://xqnqbwamrd.execute-api.us-east-1.amazonaws.com/Assignment2Stage1', '/lambdadynamointeractions', variable);
+  //const fetchResponse = await fetch('https://xqnqbwamrd.execute-api.us-east-1.amazonaws.com/Assignment2Stage1/lambdadynamointeractions/',settings);
+  //const data = await fetchResponse.json();
+  //console.log({ apiData });
+     
+  console.log("onDeleteImage_deleteimage starting");
+  //const apiData = await fetch('https://xqnqbwamrd.execute-api.us-east-1.amazonaws.com/Assignment2Stage1', {
+    //method: 'POST', 
+    //body: data
+    
+  //});
+  //console.log({ apiData });
+  //alert('Mail sent');
 }
 
 fileData = () => { 

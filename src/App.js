@@ -369,6 +369,7 @@ render() {
       return (
         <center>
         <div className="card text-center m-3">
+          <h2 className="card-header">Welcome to TagTag</h2>
           <h4>-------------------------------------------------------------------</h4>
           <h2 className="card-header">Image Upload CARLOS/ANAND</h2>
           <h4 className="card-header">API Gateway endpoint / Amplify / Lambda </h4>

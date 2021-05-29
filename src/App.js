@@ -414,7 +414,7 @@ render() {
           <br /><br />
           <h4>-------------------------------------------------------------------</h4>
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Delete an image - CARLOS Hi</h2>
+          <h2 className="card-header">Delete an image - CARLOS</h2>
           <button onClick={this.onShowImages_deleteimage}>Show all images</button>
           <br /><br />
           <input type="text" id="ImageValue_deleteimage" name="ImageValue_deleteimage" value={this.state.selectedFile_deleteimage} />

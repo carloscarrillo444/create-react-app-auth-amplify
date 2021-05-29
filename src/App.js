@@ -367,7 +367,8 @@ render() {
       const { selectedFile } = this.state;
       const { image } = this.state;
       return (
-        <div className="card">
+        <center>
+        <div className="card text-center m-3">
           <h4>-------------------------------------------------------------------</h4>
           <h2 className="card-header">Image Upload CARLOS/ANAND</h2>
           <h4 className="card-header">API Gateway endpoint / Amplify / Lambda </h4>
@@ -414,7 +415,7 @@ render() {
           <br /><br />
           <h4>-------------------------------------------------------------------</h4>
           <h4>-------------------------------------------------------------------</h4>
-          <center><h2 className="card-header">Delete an image - CARLOS</h2></center>
+          <h2 className="card-header">Delete an image - CARLOS</h2>
           <button onClick={this.onShowImages_deleteimage}>Show all images</button>
           <br /><br />
           <input type="text" id="ImageValue_deleteimage" name="ImageValue_deleteimage" value={this.state.selectedFile_deleteimage} />
@@ -426,11 +427,7 @@ render() {
           {this.fileData_deleteimage()}
           <h4>-------------------------------------------------------------------</h4>
       </div>
-      <style>
-      .card{
-        text-align: center;
-      }
-      </style>
+      </center>
       );
   }
 }

@@ -369,7 +369,7 @@ render() {
       return (
         <div className="card text-center m-3">
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Image Upload CARLOS/ANAND - DONE</h2> 
+          <h2 className="card-header">Image Upload CARLOS/ANAND</h2> 
           <h4 className="card-header">API Gateway endpoint / Amplify / Lambda </h4>                 
           <input type="file" id="uploadImage" onChange={this.onFileChange} /> 
           <input type="hidden" id="uploadImageValue" name="uploadImageValue" value="" />
@@ -377,7 +377,7 @@ render() {
           {this.fileData()} 
           <h4>-------------------------------------------------------------------</h4>     
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Find images based on the tags RONNIE-THE PLAYER/ CARLOS</h2> 
+          <h2 className="card-header">Find images based on the tags RONNIE/CARLOS/ANAND</h2> 
           <p>Name of the Tags to find:</p><input type="text" id="findimagebytag_tags" name="findimagebytag_tags" value={this.state.findimagebytag_tags} />
           <button onClick={this.findimagebytag_submit}>Find images by tag</button> 
           <br /><br />  
@@ -387,7 +387,7 @@ render() {
           <br />  
           <h4>-------------------------------------------------------------------</h4>   
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Find images based on the tags of an image - ANAND/ EKLA - THE SWIMMER (1)</h2> 
+          <h2 className="card-header">Find images based on the tags of an image - ANAND/EKLA</h2> 
           <input type="file" id="uploadImage_findimagesusingtagsofimage" onChange={this.onFileChange_findimagesusingtagsofimage} /> 
           <input type="hidden" id="uploadImageValue_findimagesusingtagsofimage" name="uploadImageValue_findimagesusingtagsofimage" value="" />
           <button onClick={this.onFileUpload_findimagesusingtagsofimage}>Upload!</button> 
@@ -414,8 +414,7 @@ render() {
           <br /><br />  
           <h4>-------------------------------------------------------------------</h4>   
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Delete an image - CARLOS - DONE</h2> 
-          <h4 className="card-header">API Gateway endpoint / Amplify / Lambda </h4>
+          <h2 className="card-header">Delete an image - CARLOS</h2>  
           <button onClick={this.onShowImages_deleteimage}>Show all images</button> 
           <br /><br /> 
           <input type="text" id="ImageValue_deleteimage" name="ImageValue_deleteimage" value={this.state.selectedFile_deleteimage} />

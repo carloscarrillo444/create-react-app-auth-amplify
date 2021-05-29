@@ -30,3 +30,7 @@
     transform: rotate(360deg);
   }
 }
+
+.card text-center m-3{
+  text-align: center;
+}

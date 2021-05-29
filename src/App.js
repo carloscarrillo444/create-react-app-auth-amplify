@@ -65,12 +65,13 @@ onFileChange_findimagesusingtagsofimage = event => {
   let files = event.target.files || event.dataTransfer.files
   let reader = new FileReader()
   reader.onload = (e) => {
-    document.getElementById("uploadImageValue__findimagesusingtagsofimage").value  = e.target.result
+    //document.getElementById("uploadImageValue_findimagesusingtagsofimage").value  = e.target.result
     this.setState({ image_findimagesusingtagsofimage: e.target.result });            
   }
-
+  reader.readAsDataURL(files[0]) 
   console.log('onFileChange_findimagesusingtagsofimage: FINISHING'); 
 };
+
 
 onShowImages_deleteimage = event => { 
 
@@ -127,15 +128,20 @@ onFileUpload = () => {
   .catch(error => console.error('Error:', error)); 
 }; 
 
-onFileUpload_findimagesusingtagsofimage = () => { 
+onFileUpload_findimagesusingtagsofimage = event => { 
 
-  let binary = atob(this.state.image__findimagesusingtagsofimage.split(',')[1])
+  //this.setState({ urlResponse: this.state.uploadURL.split('?')[0] });
+  let binary = atob(this.state.image_findimagesusingtagsofimage.split(',')[1])
   let array = []
   for (var i = 0; i < binary.length; i++) {
     array.push(binary.charCodeAt(i))
   }
   let blobData = new Blob([new Uint8Array(array)], {type: 'image/jpeg'})  
 
+  var variable = {
+    action: "find_image_by_image",
+    object: JSON.stringify(this.state.image_findimagesusingtagsofimage)    //this.state.selectedFile_deleteimage
+  };
 
   console.log('onFileUpload_findimagesusingtagsofimage: STARTING'); 
   console.log('onFileUpload_findimagesusingtagsofimage: this.state.image'); 
@@ -144,12 +150,16 @@ onFileUpload_findimagesusingtagsofimage = () => {
   console.log(this.state.selectedFile_findimagesusingtagsofimage); 
   console.log('onFileUpload_findimagesusingtagsofimage: FINISHING'); 
   
-  fetch("https://65zzkap2ug.execute-api.us-east-1.amazonaws.com/default/findimagesusingtagsofimage", {
-    method: 'PUT', 
-    body: blobData, 
-    
-  }).then(response => console.log('Success:', response))
-  .catch(error => console.error('Error:', error)); 
+  fetch("https://xqnqbwamrd.execute-api.us-east-1.amazonaws.com/Assignment2Stage1/lambdadynamointeractions", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+    }
+    ,body: JSON.stringify(variable) 
+  })
+  .then(response => response.json())
+  .then(data => this.setState({ findimagesusingtagsofimage_response: data}));
+  console.log("onFileUpload_findimagesusingtagsofimage finishing");
 }; 
  
 onDeleteImage_deleteimage = event => {
@@ -208,10 +218,8 @@ fileData_findimagesusingtagsofimage = () => {
         <h2>File Details:</h2> 
         <p>File Name: {this.state.selectedFile_findimagesusingtagsofimage.name}</p> 
         <p>File Type: {this.state.selectedFile_findimagesusingtagsofimage.type}</p> 
-        <p> 
-          Last Modified:{" "} 
-          {this.state.selectedFile_findimagesusingtagsofimage.lastModifiedDate.toDateString()} 
-        </p> 
+        <p>Response API: {this.state.findimagesusingtagsofimage_response.body}</p> 
+        
       </div> 
     ); 
   } else { 

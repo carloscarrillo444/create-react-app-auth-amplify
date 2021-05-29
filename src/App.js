@@ -31,7 +31,14 @@ class App extends Component {
       listimages_deleteimage: [],
       json_deleteimage: {},
       action: null,
-      deleteimage_response: []
+      deleteimage_response: [],
+
+      //Tag extra tag in image -- EKLA
+      fileData_Addextratags_listtags: [],
+      fileData_Addextratags_listimages: [],
+      Addextratags_imagetotag: null,
+      Addextratags_tagtotag: null,
+      fileData_Addextratags_listimages_response: null
 
 
     };
@@ -75,30 +82,32 @@ onFileChange_findimagesusingtagsofimage = event => {
 
 
 onShowImages_deleteimage = event => { 
-
   console.log('onShowImages_deleteimage: STARTING'); 
-
   fetch('https://5f0ns3zvs5.execute-api.us-east-1.amazonaws.com/default/lambdagetlistimagesdynamo')  
   .then(response => response.json())
   .then(data => this.setState({ listimages_deleteimage: data}));
-
-  //.then(response => console.log('Success:', response.json()));
-
-  //this.state.json_deleteimage = JSON.parse(this.state.listimages_deleteimage);
   console.log('json_deleteimage: ' + this.state.listimages_deleteimage); 
-  //var obj = JSON.parse(this.state.listimages_deleteimage);
-  //Object.entries(obj).forEach(([key, value]) => {
-  //  console.log(`${key} ${obj['id']}`);
-  //});
-
-
-
   console.log('onShowImages_deleteimage: FINISHING'); 
 
 };
 
+Addextratags_listimages = event => { 
+  console.log('Addextratags_listimages: STARTING');
+  fetch('https://5f0ns3zvs5.execute-api.us-east-1.amazonaws.com/default/lambdagetlistimagesdynamo')  
+  .then(response => response.json())
+  .then(data => this.setState({ fileData_Addextratags_listimages: data}));
+  console.log('fileData_Addextratags_listimages: ' + this.state.fileData_Addextratags_listimages); 
+  console.log('Addextratags_listimages: FINISHING'); 
+};
 
-
+Addextratags_listtags = event => { 
+  console.log('Addextratags_listtags: STARTING');
+  fetch('https://5bnxrmsgv5.execute-api.us-east-1.amazonaws.com/default/lambdagetlisttagsdynamo')  
+  .then(response => response.json())
+  .then(data => this.setState({ fileData_Addextratags_listtags: data}));
+  console.log('fileData_Addextratags_listtags: ' + this.state.fileData_Addextratags_listtags); 
+  console.log('Addextratags_listtags: FINISHING'); 
+};
 
 
 onFileUpload = () => { 
@@ -163,6 +172,31 @@ onFileUpload_findimagesusingtagsofimage = event => {
   console.log("onFileUpload_findimagesusingtagsofimage finishing");
 }; 
  
+Addextratags_submiextratag = event => { 
+
+  var variable = {
+    action: "add_extra_tag_to_image",
+    image_to_tag: document.getElementById("Addextratags_imagetotag").value,  //this.state.Addextratags_imagetotag,
+    tag_to_tag: document.getElementById("Addextratags_tagtotag").value
+  };
+
+  console.log('Addextratags_submiextratag: STARTING'); 
+  console.log('Addextratags_submiextratag: this.state.Addextratags_imagetotag'); 
+  console.log(this.state.Addextratags_imagetotag); 
+  console.log('Addextratags_submiextratag: this.state.Addextratags_tagtotag'); 
+  console.log(this.state.Addextratags_tagtotag);   
+  fetch("https://xqnqbwamrd.execute-api.us-east-1.amazonaws.com/Assignment2Stage1/lambdadynamointeractions", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+    }
+    ,body: JSON.stringify(variable) 
+  })
+  .then(response => response.json())
+  .then(data => this.setState({ fileData_Addextratags_listimages_response: data}));
+  console.log("Addextratags_submiextratag finishing");
+}; 
+
 onDeleteImage_deleteimage = event => {
   
   var variable = {
@@ -185,6 +219,41 @@ onDeleteImage_deleteimage = event => {
   console.log("onDeleteImage_deleteimage finishing");
 
 };
+
+fileData_Addextratags_listimages_response = () => { 
+  if (this.state.fileData_Addextratags_listimages_response) { 
+    return ( 
+      <div> 
+        <h4>Response API Extra Tag Action:</h4>   
+        {this.state.fileData_Addextratags_listimages_response.body}    
+      </div> 
+    ); 
+  }  
+}; 
+
+fileData_Addextratags_listimages = () => { 
+  if (this.state.fileData_Addextratags_listimages) { 
+    const listItems = this.state.fileData_Addextratags_listimages.map((d) => <li key={d.id}>{d.id}</li>);
+    return ( 
+      <div> 
+        <h4>Images Details:</h4>   
+        {listItems }    
+      </div> 
+    ); 
+  } 
+}; 
+
+fileData_Addextratags_listtags = () => { 
+  if (this.state.fileData_Addextratags_listtags) { 
+    const listItems = this.state.fileData_Addextratags_listtags.map((d) => <li key={d.id}>{d.id}</li>);
+    return ( 
+      <div> 
+        <h4>Tags Details:</h4>   
+        {listItems }    
+      </div> 
+    ); 
+  } 
+}; 
 
 fileData = () => { 
   if (this.state.selectedFile) { 
@@ -289,11 +358,24 @@ render() {
           {this.fileData_findimagesusingtagsofimage()} 
           <h4>-------------------------------------------------------------------</h4>  
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Add extra tags to an image - RONNIE-THE PLAYER (2)</h2> 
+          <h2 className="card-header">Add extra tags to an image - EKLA/CARLOS</h2> 
           <br /> 
-          <br /> 
-          <br /> 
-          <br /> 
+          <button onClick={this.Addextratags_listimages}>Show all images</button> 
+          <br /><br />
+          <button onClick={this.Addextratags_listtags}>Show all Tags</button> 
+          <br /><br /> 
+          <p>Name of the Image to tag:</p><input type="text" id="Addextratags_imagetotag" name="Addextratags_imagetotag" value={this.state.Addextratags_imagetotag} />
+          <br />
+          <p>Name of the Tag to use:</p><input type="text" id="Addextratags_tagtotag" name="Addextratags_tagtotag" value={this.state.Addextratags_tagtotag} />
+          <br /><br />
+          <button onClick={this.Addextratags_submiextratag}>Submit extra tag</button> 
+          <br /><br />  
+          {this.fileData_Addextratags_listimages_response()} 
+          <br /><br /> 
+          {this.fileData_Addextratags_listimages()} 
+          <br /><br /> 
+          {this.fileData_Addextratags_listtags()} 
+          <br /><br />  
           <h4>-------------------------------------------------------------------</h4>   
           <h4>-------------------------------------------------------------------</h4>
           <h2 className="card-header">Delete an image - CARLOS - DONE</h2> 

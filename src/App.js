@@ -152,7 +152,7 @@ onFileUpload_findimagesusingtagsofimage = event => {
 
   var variable = {
     action: "find_image_by_image",
-    object: JSON.stringify(this.state.image_findimagesusingtagsofimage)    //this.state.selectedFile_deleteimage
+    object: JSON.stringify(this.state.image_findimagesusingtagsofimage.split(',')[1])    //this.state.selectedFile_deleteimage
   };
 
   console.log('onFileUpload_findimagesusingtagsofimage: STARTING'); 

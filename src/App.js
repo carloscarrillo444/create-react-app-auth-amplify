@@ -14,18 +14,19 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // upload image
+      // upload image -- CARLOS
       selectedFile: null,
       uploadURL: null,
       updatedAt: null,
       image: null,
       urlResponse: null,
 
-      //findimagesusingtagsofimage
+      //findimagesusingtagsofimage -- ANAND
       selectedFile_findimagesusingtagsofimage: null,
       image_findimagesusingtagsofimage: null,
+      findimagesusingtagsofimage_response: [],
 
-      //Delete an image
+      //Delete an image -- CARLOS
       selectedFile_deleteimage: null,
       listimages_deleteimage: [],
       json_deleteimage: {},
@@ -295,7 +296,7 @@ render() {
           <br /> 
           <h4>-------------------------------------------------------------------</h4>   
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Delete an image - CARLOS</h2> 
+          <h2 className="card-header">Delete an image - CARLOS - DONE</h2> 
           <h4 className="card-header">API Gateway endpoint / Amplify / Lambda </h4>
           <button onClick={this.onShowImages_deleteimage}>Show all images</button> 
           <br /><br /> 

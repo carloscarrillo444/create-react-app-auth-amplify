@@ -38,9 +38,11 @@ class App extends Component {
       fileData_Addextratags_listimages: [],
       Addextratags_imagetotag: null,
       Addextratags_tagtotag: null,
-      fileData_Addextratags_listimages_response: null
+      fileData_Addextratags_listimages_response: null,
 
-
+      // Find images by tags -- RONNIE
+      fileData_findimagebytag_response: [],
+      findimagebytag_tags: null
     };
    
 }
@@ -197,6 +199,28 @@ Addextratags_submiextratag = event => {
   console.log("Addextratags_submiextratag finishing");
 }; 
 
+findimagebytag_submit = event => { 
+
+  var variable = {
+    action: "find_image_by_tag",
+    object: document.getElementById("findimagebytag_tags").value
+  };
+
+  console.log('findimagebytag_submit: STARTING'); 
+  console.log('findimagebytag_submit: document.getElementById("findimagebytag_tags").value'); 
+  console.log(document.getElementById("findimagebytag_tags").value); 
+  fetch("https://xqnqbwamrd.execute-api.us-east-1.amazonaws.com/Assignment2Stage1/lambdadynamointeractions", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+    }
+    ,body: JSON.stringify(variable) 
+  })
+  .then(response => response.json())
+  .then(data => this.setState({ fileData_findimagebytag_response: data}));
+  console.log("findimagebytag_submit finishing");
+}; 
+
 onDeleteImage_deleteimage = event => {
   
   var variable = {
@@ -326,7 +350,17 @@ fileData_deleteimage_response = () => {
   }  
 }; 
 
-
+fileData_findimagebytag_response = () => { 
+  if (this.state.fileData_findimagebytag_response) { 
+     return ( 
+      <div> 
+        <h4>Images Details:</h4>   
+        {this.state.fileData_findimagebytag_response.body}  
+        
+      </div> 
+    ); 
+  } 
+}; 
 
 render() {
       const { uploadURL } = this.state;
@@ -343,15 +377,17 @@ render() {
           {this.fileData()} 
           <h4>-------------------------------------------------------------------</h4>     
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Find images based on the tags RONNIE-THE PLAYER (1)</h2> 
+          <h2 className="card-header">Find images based on the tags RONNIE-THE PLAYER/ CARLOS</h2> 
+          <p>Name of the Tags to find:</p><input type="text" id="findimagebytag_tags" name="findimagebytag_tags" value={this.state.findimagebytag_tags} />
+          <button onClick={this.findimagebytag_submit}>Find images by tag</button> 
+          <br /><br />  
+          {this.fileData_findimagebytag_response()}
           <br /> 
           <br /> 
-          <br /> 
-          <br /> 
+          <br />  
           <h4>-------------------------------------------------------------------</h4>   
           <h4>-------------------------------------------------------------------</h4>
           <h2 className="card-header">Find images based on the tags of an image - ANAND/ EKLA - THE SWIMMER (1)</h2> 
-           <h4 className="card-header">API Gateway endpoint / Amplify / Lambda </h4>                 
           <input type="file" id="uploadImage_findimagesusingtagsofimage" onChange={this.onFileChange_findimagesusingtagsofimage} /> 
           <input type="hidden" id="uploadImageValue_findimagesusingtagsofimage" name="uploadImageValue_findimagesusingtagsofimage" value="" />
           <button onClick={this.onFileUpload_findimagesusingtagsofimage}>Upload!</button> 

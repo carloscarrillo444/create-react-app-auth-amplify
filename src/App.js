@@ -367,7 +367,7 @@ render() {
       const { selectedFile } = this.state;
       const { image } = this.state;
       return (
-        <div className="card">
+        <div className="card text-center m-3">
           <h4>-------------------------------------------------------------------</h4>
           <h2 className="card-header">Image Upload CARLOS/ANAND</h2>
           <h4 className="card-header">API Gateway endpoint / Amplify / Lambda </h4>

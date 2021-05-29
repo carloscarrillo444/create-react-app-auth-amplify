@@ -27,7 +27,10 @@ class App extends Component {
 
       //Delete an image
       selectedFile_deleteimage: null,
-      listimages_deleteimage: null
+      listimages_deleteimage: [],
+      json_deleteimage: {},
+      action: null,
+      deleteimage_response: []
 
 
     };
@@ -74,8 +77,19 @@ onShowImages_deleteimage = event => {
   console.log('onShowImages_deleteimage: STARTING'); 
 
   fetch('https://5f0ns3zvs5.execute-api.us-east-1.amazonaws.com/default/lambdagetlistimagesdynamo')  
-  .then(response => console.log('Success:', response))
-  //.then(data => this.setState({ listimages_deleteimage: data }));
+  .then(response => response.json())
+  .then(data => this.setState({ listimages_deleteimage: data}));
+
+  //.then(response => console.log('Success:', response.json()));
+
+  //this.state.json_deleteimage = JSON.parse(this.state.listimages_deleteimage);
+  console.log('json_deleteimage: ' + this.state.listimages_deleteimage); 
+  //var obj = JSON.parse(this.state.listimages_deleteimage);
+  //Object.entries(obj).forEach(([key, value]) => {
+  //  console.log(`${key} ${obj['id']}`);
+  //});
+
+
 
   console.log('onShowImages_deleteimage: FINISHING'); 
 
@@ -138,79 +152,28 @@ onFileUpload_findimagesusingtagsofimage = () => {
   .catch(error => console.error('Error:', error)); 
 }; 
  
-onDeleteImage_deleteimage_old = () => { 
-
-  console.log('onDeleteImage_deleteimage: STARTING'); 
-  console.log('onDeleteImage_deleteimage: selectedFile_deleteimage'); 
-  console.log(this.state.selectedFile_deleteimage); 
-  this.state.action = 'delete'
-    
-  var output = {
-    "action": "crefffate",
-    "object": "value2"
-  };
-
-  fetch("https://xqnqbwamrd.execute-api.us-east-1.amazonaws.com/Assignment2Stage1", {
-    method: 'POST', 
-    body: "{'action':'create'}", 
-    
-  }).then(response => console.log('Success:', response))
-  .catch(error => console.error('Error:', error)); 
-  console.log('onDeleteImage_deleteimage: FINISHING'); 
-}; 
-
-
-async onDeleteImage_deleteimage() {
+onDeleteImage_deleteimage = event => {
   
   var variable = {
-    action: "list",
-    object: "objecttest"
+    action: "delete_image",
+    object: document.getElementById("ImageValue_deleteimage").value   //this.state.selectedFile_deleteimage
   };
 
-  const settings = {
-    method: 'POST',
-    body: JSON.stringify(variable),
-    headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-    }
-  };
-
-  console.log("onDeleteImage_deleteimage starting");
+   console.log("onDeleteImage_deleteimage starting");
 
   fetch("https://xqnqbwamrd.execute-api.us-east-1.amazonaws.com/Assignment2Stage1/lambdadynamointeractions", {
   method: "POST",
   headers: {
-    "content-type": "application/json"
-    ,"Access-Control-Allow-Origin": "*"
-    //"Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+    //"content-type": "application/json"
+    "Content-Type": "application/json"
     }
-    ,body: "{action: 'list', object: 'objectss'}"
+    ,body: JSON.stringify(variable) //"{'action': 'list'}"//" \"action\": \"list\" }"
   })
-  .then(response => {
-    console.log(response)
-  })
-  .catch(err => {
-    console.log(err);
-  });
+  .then(response => response.json())
+  .then(data => this.setState({ deleteimage_response: data}));
+  console.log("onDeleteImage_deleteimage finishing");
 
-
-
-  
-  //const apiData = await API.post('https://xqnqbwamrd.execute-api.us-east-1.amazonaws.com/Assignment2Stage1', '/lambdadynamointeractions', variable);
-  //const fetchResponse = await fetch('https://xqnqbwamrd.execute-api.us-east-1.amazonaws.com/Assignment2Stage1/lambdadynamointeractions/',settings);
-  //const data = await fetchResponse.json();
-  //console.log({ apiData });
-     
-  console.log("onDeleteImage_deleteimage starting");
-  //const apiData = await fetch('https://xqnqbwamrd.execute-api.us-east-1.amazonaws.com/Assignment2Stage1', {
-    //method: 'POST', 
-    //body: data
-    
-  //});
-  //console.log({ apiData });
-  //alert('Mail sent');
-}
+};
 
 fileData = () => { 
   if (this.state.selectedFile) { 
@@ -263,14 +226,26 @@ fileData_findimagesusingtagsofimage = () => {
 
 fileData_deleteimage = () => { 
   if (this.state.listimages_deleteimage) { 
-      
+    const listItems = this.state.listimages_deleteimage.map((d) => <li key={d.id}>{d.id}</li>);
     return ( 
       <div> 
-        <h2>Images Details:</h2> 
-        <p>{this.state.listimages_deleteimage}</p>        
+        <h2>Images Details:</h2>   
+        {listItems }    
       </div> 
     ); 
   } 
+}; 
+
+fileData_deleteimage_response = () => { 
+  if (this.state.deleteimage_response) { 
+    //const listItems = this.state.deleteimage_response.map((d) => <li key={d.Items}>{d.Items}</li>);
+    return ( 
+      <div> 
+        <h2>Result Delete Action:</h2>   
+        {this.state.deleteimage_response.body}    
+      </div> 
+    ); 
+  }  
 }; 
 
 
@@ -316,12 +291,14 @@ render() {
           <h4 className="card-header">API Gateway endpoint / Amplify / Lambda </h4>
           <button onClick={this.onShowImages_deleteimage}>Show all images</button> 
           <br /><br /> 
-          <input type="text" id="uploadImageValue_deleteimage" name="uploadImageValue_deleteimage" value="" />
+          <input type="text" id="ImageValue_deleteimage" name="ImageValue_deleteimage" value={this.state.selectedFile_deleteimage} />
           <br /><br /> 
           <button onClick={this.onDeleteImage_deleteimage}>delete image</button> 
-          <br /><br /> 
+          <br />
+          {this.fileData_deleteimage_response()} 
+          <br />
           {this.fileData_deleteimage()} 
-          <h4>-------------------------------------------------------------------</h4>    
+          <h4>-------------------------------------------------------------------</h4>        
       </div>
           
       );

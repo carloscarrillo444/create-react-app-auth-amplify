@@ -14,33 +14,29 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // upload image -- CARLOS
       selectedFile: null,
       uploadURL: null,
       updatedAt: null,
       image: null,
       urlResponse: null,
 
-      //findimagesusingtagsofimage -- ANAND
       selectedFile_findimagesusingtagsofimage: null,
       image_findimagesusingtagsofimage: null,
       findimagesusingtagsofimage_response: [],
 
-      //Delete an image -- CARLOS
       selectedFile_deleteimage: null,
       listimages_deleteimage: [],
       json_deleteimage: {},
       action: null,
       deleteimage_response: [],
 
-      //Tag extra tag in image -- EKLA
       fileData_Addextratags_listtags: [],
       fileData_Addextratags_listimages: [],
       Addextratags_imagetotag: null,
       Addextratags_tagtotag: null,
       fileData_Addextratags_listimages_response: null,
 
-      // Find images by tags -- RONNIE
+
       fileData_findimagebytag_response: [],
       findimagebytag_tags: null
     };

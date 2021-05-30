@@ -365,7 +365,9 @@ render() {
       return (
         <center>
         <div className="card text-center m-3">
-          <h2 className="card-header">Welcome to TagTag</h2>
+        <h2 className="card-header">Welcome to TagTag</h2>
+        <button type="button" class="collapsible">(3.2)Image Upload</button>
+          <div class="content">  
           <h4>-------------------------------------------------------------------</h4>
           <h2 className="card-header">(3.2)Image Upload</h2>
           <h4 className="card-header">API Gateway endpoint / Amplify / Lambda </h4>
@@ -373,6 +375,9 @@ render() {
           <input type="hidden" id="uploadImageValue" name="uploadImageValue" value="" />
           <button onClick={this.onFileUpload}>Upload!</button>
           {this.fileData()}
+          </div>
+          <button type="button" class="collapsible">3.3(1)Find images based on the tags</button>
+          <div class="content">
           <h4>-------------------------------------------------------------------</h4>
           <h4>-------------------------------------------------------------------</h4>
           <h2 className="card-header">3.3(1)Find images based on the tags</h2>
@@ -383,6 +388,9 @@ render() {
           <br />
           <br />
           <br />
+          </div>
+          <button type="button" class="collapsible">3.3(2)Find images based on the tags of an image</button>
+          <div class="content">
           <h4>-------------------------------------------------------------------</h4>
           <h4>-------------------------------------------------------------------</h4>
           <h2 className="card-header">3.3(2)Find images based on the tags of an image</h2>
@@ -390,6 +398,9 @@ render() {
           <input type="hidden" id="uploadImageValue_findimagesusingtagsofimage" name="uploadImageValue_findimagesusingtagsofimage" value="" />
           <button onClick={this.onFileUpload_findimagesusingtagsofimage}>Upload!</button>
           {this.fileData_findimagesusingtagsofimage()}
+          </div>
+          <button type="button" class="collapsible">3.3(3)Add extra tags to an image</button>
+          <div class="content">
           <h4>-------------------------------------------------------------------</h4>
           <h4>-------------------------------------------------------------------</h4>
           <h2 className="card-header">3.3(3)Add extra tags to an image</h2>
@@ -410,6 +421,9 @@ render() {
           <br /><br />
           {this.fileData_Addextratags_listtags()}
           <br /><br />
+          </div>
+          <button type="button" class="collapsible">3.3(4)Delete an image</button>
+          <div class="content">
           <h4>-------------------------------------------------------------------</h4>
           <h4>-------------------------------------------------------------------</h4>
           <h2 className="card-header">3.3(4)Delete an image</h2>
@@ -423,6 +437,7 @@ render() {
           <br />
           {this.fileData_deleteimage()}
           <h4>-------------------------------------------------------------------</h4>
+          </div>
       </div>
       </center>
       );

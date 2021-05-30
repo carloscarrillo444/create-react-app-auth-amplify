@@ -371,7 +371,7 @@ render() {
         <div className="card text-center m-3">
           <h2 className="card-header">Welcome to TagTag</h2>
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Image Upload</h2>
+          <h2 className="card-header">(3.2)Image Upload</h2>
           <h4 className="card-header">API Gateway endpoint / Amplify / Lambda </h4>
           <input type="file" id="uploadImage" onChange={this.onFileChange} />
           <input type="hidden" id="uploadImageValue" name="uploadImageValue" value="" />
@@ -379,7 +379,7 @@ render() {
           {this.fileData()}
           <h4>-------------------------------------------------------------------</h4>
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Find images based on the tags</h2>
+          <h2 className="card-header">3.3(1)Find images based on the tags</h2>
           <p>Name of the Tags to find:</p><input type="text" id="findimagebytag_tags" name="findimagebytag_tags" value={this.state.findimagebytag_tags} />
           <button onClick={this.findimagebytag_submit}>Find images by tag</button>
           <br /><br />
@@ -389,14 +389,14 @@ render() {
           <br />
           <h4>-------------------------------------------------------------------</h4>
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Find images based on the tags of an image</h2>
+          <h2 className="card-header">3.3(2)Find images based on the tags of an image</h2>
           <input type="file" id="uploadImage_findimagesusingtagsofimage" onChange={this.onFileChange_findimagesusingtagsofimage} />
           <input type="hidden" id="uploadImageValue_findimagesusingtagsofimage" name="uploadImageValue_findimagesusingtagsofimage" value="" />
           <button onClick={this.onFileUpload_findimagesusingtagsofimage}>Upload!</button>
           {this.fileData_findimagesusingtagsofimage()}
           <h4>-------------------------------------------------------------------</h4>
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Add extra tags to an image</h2>
+          <h2 className="card-header">3.3(3)Add extra tags to an image</h2>
           <br />
           <button onClick={this.Addextratags_listimages}>Show all images</button>
           <br /><br />
@@ -416,7 +416,7 @@ render() {
           <br /><br />
           <h4>-------------------------------------------------------------------</h4>
           <h4>-------------------------------------------------------------------</h4>
-          <h2 className="card-header">Delete an image</h2>
+          <h2 className="card-header">3.3(4)Delete an image</h2>
           <button onClick={this.onShowImages_deleteimage}>Show all images</button>
           <br /><br />
           <input type="text" id="ImageValue_deleteimage" name="ImageValue_deleteimage" value={this.state.selectedFile_deleteimage} />
